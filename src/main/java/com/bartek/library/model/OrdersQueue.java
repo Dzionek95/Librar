@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Queue {
+public class OrdersQueue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

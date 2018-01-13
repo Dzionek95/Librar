@@ -2,6 +2,7 @@ package com.bartek.library.controller;
 
 import com.bartek.library.model.NewBookPurchaseRequest;
 import com.bartek.library.service.NewBookPurchaseRequestService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,10 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.bartek.library.controller.NewBookPurchaseRequestController.NEW_BOOK_PURCHASE_REQUEST_PATH;
 
 
-/**
- * @author Bartlomiej Janik
- * @since 1/7/2018
- */
 @RestController
 @RequestMapping(NEW_BOOK_PURCHASE_REQUEST_PATH)
 public class NewBookPurchaseRequestController {
@@ -28,9 +25,10 @@ public class NewBookPurchaseRequestController {
         this.newBookPurchaseRequestService = newBookPurchaseRequestService;
     }
 
-    @PostMapping
-    NewBookPurchaseRequest createNewBookRequest(@RequestBody NewBookPurchaseRequest bookrequest){
-        return newBookPurchaseRequestService.createNewBookRequest(bookrequest);
+    @ApiOperation(value = "/save", notes = "Possibility to create new book request, which can be accepted by admin")
+    @PostMapping("/save")
+    NewBookPurchaseRequest createNewBookRequest(@RequestBody NewBookPurchaseRequest bookPurchaseRequest){
+        return newBookPurchaseRequestService.createNewBookRequest(bookPurchaseRequest);
     }
 
 }

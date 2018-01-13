@@ -26,12 +26,12 @@ public class NewBookPurchaseRequestService {
         this.securityUtilities = securityUtilities;
     }
 
-    public NewBookPurchaseRequest createNewBookRequest(NewBookPurchaseRequest bookRequest) {
+    public NewBookPurchaseRequest createNewBookRequest(NewBookPurchaseRequest bookPurchaseRequest) {
 
-        if (checkIfBookIsAlreadyAvailableInLibrary(bookRequest)) {
-            if (checkIfSuchRequestHasBeenAlreadyCreated(bookRequest)) {
-                fillRequestWithAdditionalData(bookRequest);
-                newBookPurchaseRequestRepository.save(bookRequest);
+        if (checkIfBookIsAlreadyAvailableInLibrary(bookPurchaseRequest)) {
+            if (checkIfSuchRequestHasBeenAlreadyCreated(bookPurchaseRequest)) {
+                fillRequestWithAdditionalData(bookPurchaseRequest);
+                newBookPurchaseRequestRepository.save(bookPurchaseRequest);
             } else {
                 throw new IllegalArgumentException("Such request has been already made!");
             }
@@ -39,7 +39,7 @@ public class NewBookPurchaseRequestService {
             throw new IllegalArgumentException("Book is already library!");
         }
 
-        return bookRequest;
+        return bookPurchaseRequest;
     }
 
 

@@ -3,10 +3,10 @@ package com.bartek.library.service;
 
 import com.bartek.library.model.Book;
 import com.bartek.library.model.BookRental;
-import com.bartek.library.model.Queue;
+import com.bartek.library.model.OrdersQueue;
 import com.bartek.library.repository.BookRentalRepository;
 import com.bartek.library.repository.BookRepository;
-import com.bartek.library.repository.QueueRepository;
+import com.bartek.library.repository.OrdersQueueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +17,17 @@ public class BookRentalService {
 
     private BookRentalRepository rentBookRepository;
     private BookRepository bookRepository;
-    private QueueRepository queueRepository;
+    private OrdersQueueRepository ordersQueueRepository;
     private SecurityUtilities securityUtilities;
 
     @Autowired
     BookRentalService(BookRentalRepository rentBookRepository,
                       BookRepository bookRepository,
-                      QueueRepository queueRepository,
+                      OrdersQueueRepository ordersQueueRepository,
                       SecurityUtilities securityUtilities) {
         this.rentBookRepository = rentBookRepository;
         this.bookRepository = bookRepository;
-        this.queueRepository = queueRepository;
+        this.ordersQueueRepository = ordersQueueRepository;
         this.securityUtilities = securityUtilities;
     }
 
@@ -60,11 +60,11 @@ public class BookRentalService {
     }
 
     private void createPlaceInQueueForUser(Book bookToRent) {
-        queueRepository.save(createQueueData(bookToRent));
+        ordersQueueRepository.save(createQueueData(bookToRent));
     }
 
-    private Queue createQueueData(Book bookToRent) {
-        return Queue.builder()
+    private OrdersQueue createQueueData(Book bookToRent) {
+        return OrdersQueue.builder()
                 .queueToBook(bookToRent)
                 .timeOfJoiningQueue(LocalDateTime.now())
                 .username(securityUtilities.retrieveNameFromAuthentication())

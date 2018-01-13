@@ -59,11 +59,11 @@ public class BookRentalControllerTest {
         //when
         when(bookRentalService.rentBook(any())).thenReturn(dummyBookRental);
         //then
-        mockMvc.perform(post("/rental/rent?idOfBook=1"))
+        mockMvc.perform(post("/rental/rent?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 
-        Assert.assertEquals(mockMvc.perform(post("/rental/rent?idOfBook=1")).andReturn().getResponse().getContentAsString(), response);
+        Assert.assertEquals(mockMvc.perform(post("/rental/rent?id=1")).andReturn().getResponse().getContentAsString(), response);
         verify(bookRentalService, times(2)).rentBook(any());
     }
 
@@ -81,11 +81,11 @@ public class BookRentalControllerTest {
         when(bookRentalService.returnBook(any())).thenReturn(dummyBook);
         //then
 
-        mockMvc.perform(post("/rental/return?idOfBook=1"))
+        mockMvc.perform(post("/rental/return?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 
-        Assert.assertEquals(mockMvc.perform(post("/rental/return?idOfBook=1")).andReturn().getResponse().getContentAsString(), response);
+        Assert.assertEquals(mockMvc.perform(post("/rental/return?id=1")).andReturn().getResponse().getContentAsString(), response);
         verify(bookRentalService, times(2)).returnBook(any());
     }
 

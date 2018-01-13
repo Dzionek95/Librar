@@ -20,8 +20,8 @@ public class AdminBookService {
        return bookRepository.save(book);
     }
 
-    public void deleteBookById(Long id) {
-        bookRepository.delete(id);
+    public void deleteBookById(Long idOfBook) {
+        bookRepository.delete(idOfBook);
     }
 
     public Book updateBooks(Book book) {

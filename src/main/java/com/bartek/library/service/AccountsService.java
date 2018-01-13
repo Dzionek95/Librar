@@ -43,9 +43,9 @@ public class AccountsService {
         return new User(accountToCreate.getUsername(), accountToCreate.getPassword(), arrayList);
     }
 
-    public void deleteAccount(Long id) {
-        log.info("Account with id: {} has been deleted ", id);
-        accountRepository.delete(id);
+    public void deleteAccount(Long idOfAccount) {
+        log.info("Account with id: {} has been deleted ", idOfAccount);
+        accountRepository.delete(idOfAccount);
     }
 
     public Accounts updateAccount(Accounts accountToUpdate) {

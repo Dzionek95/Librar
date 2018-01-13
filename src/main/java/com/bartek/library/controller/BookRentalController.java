@@ -3,6 +3,7 @@ package com.bartek.library.controller;
 import com.bartek.library.model.Book;
 import com.bartek.library.model.BookRental;
 import com.bartek.library.service.BookRentalService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,17 +21,19 @@ public class BookRentalController {
     private BookRentalService bookRentalService;
 
     @Autowired
-    BookRentalController(BookRentalService bookRentalService){
+    BookRentalController(BookRentalService bookRentalService) {
         this.bookRentalService = bookRentalService;
     }
 
+    @ApiOperation(value = "/rent", notes = "Possibility to rent a book from library, by it's id")
     @PostMapping("/rent")
-    BookRental rentBook(@RequestParam Long idOfBook){
-        return bookRentalService.rentBook(idOfBook);
+    BookRental rentBook(@RequestParam Long id) {
+        return bookRentalService.rentBook(id);
     }
 
+    @ApiOperation(value = "/return", notes = "Possibility to return book, by it's id")
     @PostMapping("/return")
-    Book returnBook(@RequestParam Long idOfBook){
-        return bookRentalService.returnBook(idOfBook);
+    Book returnBook(@RequestParam Long id) {
+        return bookRentalService.returnBook(id);
     }
 }

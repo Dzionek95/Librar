@@ -2,6 +2,7 @@ package com.bartek.library.configuration;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final DataSource dataSource;
 
     @Autowired
-    public LibrarySecurityConfiguration(DataSource dataSource) {
+    public LibrarySecurityConfiguration(@Qualifier("dataSource") DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -49,7 +50,7 @@ class LibrarySecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/h2/*", "/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/h2/*", "/v2/*" ,"/admin/*").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

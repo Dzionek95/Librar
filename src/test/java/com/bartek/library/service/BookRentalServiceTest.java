@@ -4,7 +4,7 @@ import com.bartek.library.model.Book;
 import com.bartek.library.model.BookRental;
 import com.bartek.library.repository.BookRentalRepository;
 import com.bartek.library.repository.BookRepository;
-import com.bartek.library.repository.QueueRepository;
+import com.bartek.library.repository.OrdersQueueRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +26,7 @@ public class BookRentalServiceTest {
     @Mock
     private BookRepository bookRepository;
     @Mock
-    private QueueRepository queueRepository;
+    private OrdersQueueRepository ordersQueueRepository;
     @Mock
     private SecurityUtilities securityUtilities;
 

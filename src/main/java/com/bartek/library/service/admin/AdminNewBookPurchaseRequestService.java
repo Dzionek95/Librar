@@ -31,8 +31,8 @@ public class AdminNewBookPurchaseRequestService {
         return allPurchaseRequests;
     }
 
-    public NewBookPurchaseRequest acknowledgePurchaseRequest(Long id) {
-        NewBookPurchaseRequest newBookPurchaseRequest = newBookPurchaseRequestRepository.findOne(id);
+    public NewBookPurchaseRequest acknowledgePurchaseRequest(Long idOfPurchaseRequest) {
+        NewBookPurchaseRequest newBookPurchaseRequest = newBookPurchaseRequestRepository.findOne(idOfPurchaseRequest);
 
         saveNewBookToDb(newBookPurchaseRequest);
         newBookPurchaseRequest.setApproved(true);
