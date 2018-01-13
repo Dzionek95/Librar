@@ -12,5 +12,6 @@
 .project
 .settings/
 .sonar/
+.scannerwork/
 
 /version.txt
