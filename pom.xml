@@ -8,7 +8,7 @@
     <artifactId>library</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>BOOK LIBRARY</name>
+    <name>Library</name>
 
     <description>
         Purpose of this project is to practise my coding skills, and getting better with multiple libraries that are
@@ -126,7 +126,7 @@
                     </execution>
                     <execution>
                         <id>default-report</id>
-                        <phase>prepare-package</phase>
+                        <phase>site</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
