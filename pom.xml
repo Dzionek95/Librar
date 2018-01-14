@@ -15,6 +15,19 @@
         included in this project. Full libraries list can be found in github readme.
     </description>
 
+    <developers>
+        <developer>
+            <name>Bartłomiej Janik</name>
+            <email>bartlomiej9519@gmail.com</email>
+            <roles>
+                <role>Developer</role>
+                <role>Architect</role>
+                <role>Tester</role>
+                <role>Dev-ops</role>
+            </roles>
+        </developer>
+    </developers>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
