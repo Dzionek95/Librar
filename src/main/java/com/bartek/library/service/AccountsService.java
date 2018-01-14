@@ -1,6 +1,6 @@
 package com.bartek.library.service;
 
-import com.bartek.library.model.accounts.Accounts;
+import com.bartek.library.model.accounts.Account;
 import com.bartek.library.repository.admin.AccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +26,18 @@ public class AccountsService {
         this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
     }
 
-    public Accounts createAccount(Accounts accountToCreate) {
+    public Account createAccount(Account accountToCreate) {
         registerAccountInSecurityContext(accountToCreate);
         accountToCreate.setEnabled(true);
         log.info("Account has been created {}", accountToCreate.toString());
         return accountRepository.save(accountToCreate);
     }
 
-    private void registerAccountInSecurityContext(Accounts accountToCreate) {
+    private void registerAccountInSecurityContext(Account accountToCreate) {
         inMemoryUserDetailsManager.createUser(createSecurityUser(accountToCreate));
     }
 
-    private UserDetails createSecurityUser(Accounts accountToCreate) {
+    private UserDetails createSecurityUser(Account accountToCreate) {
         ArrayList<GrantedAuthority> arrayList = new ArrayList<>();
         arrayList.add((GrantedAuthority) () -> accountToCreate.getRole().toString());
         return new User(accountToCreate.getUsername(), accountToCreate.getPassword(), arrayList);
@@ -48,7 +48,7 @@ public class AccountsService {
         accountRepository.delete(idOfAccount);
     }
 
-    public Accounts updateAccount(Accounts accountToUpdate) {
+    public Account updateAccount(Account accountToUpdate) {
         log.info("Account has been updated ", accountToUpdate);
         return accountRepository.save(accountToUpdate);
     }

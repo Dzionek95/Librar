@@ -1,6 +1,6 @@
 package com.bartek.library.controller.admin;
 
-import com.bartek.library.model.accounts.Accounts;
+import com.bartek.library.model.accounts.Account;
 import com.bartek.library.service.AccountsService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class AccountsController {
 
     @ApiOperation(value = "/create", notes = "Possibility to create new user account")
     @PostMapping("/create")
-    Accounts createAccount(@RequestBody Accounts accountToCreate) {
+    Account createAccount(@RequestBody Account accountToCreate) {
         return accountsService.createAccount(accountToCreate);
     }
 
@@ -33,9 +33,9 @@ public class AccountsController {
         accountsService.deleteAccount(id);
     }
 
-    @ApiOperation(value = "/update", notes = "Possibility to update account by account body")
+        @ApiOperation(value = "/update", notes = "Possibility to update account by account body")
     @PutMapping("/update")
-    Accounts updateAccount(@RequestBody Accounts accountToUpdate) {
+    Account updateAccount(@RequestBody Account accountToUpdate) {
         return accountsService.updateAccount(accountToUpdate);
     }
 }

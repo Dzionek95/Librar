@@ -1,7 +1,7 @@
 package com.bartek.library.configuration;
 
 import com.bartek.library.model.Book;
-import com.bartek.library.model.accounts.Accounts;
+import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.accounts.Role;
 import com.bartek.library.repository.BookRepository;
 import com.bartek.library.repository.admin.AccountRepository;
@@ -29,7 +29,7 @@ public class InitialData {
     InitializingBean persistUserToDb() {
         log.info("Persisted user data to database");
         return () -> {
-            accountRepository.save(Accounts
+            accountRepository.save(Account
                     .builder()
                     .username("Bartek")
                     .password("Bartek")
@@ -37,7 +37,7 @@ public class InitialData {
                     .enabled(true)
                     .build());
 
-            accountRepository.save(Accounts
+            accountRepository.save(Account
                     .builder()
                     .username("Admin")
                     .password("Admin")
