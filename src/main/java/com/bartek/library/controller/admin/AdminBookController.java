@@ -29,8 +29,8 @@ public class AdminBookController {
     }
 
 
-    @ApiOperation(value = "/save", notes = "Possibility to remove book from library, by book id")
-    @DeleteMapping("/save")
+    @ApiOperation(value = "/delete", notes = "Possibility to remove book from library, by book id")
+    @DeleteMapping("/delete")
     void deleteBook(@RequestParam Long id) {
         adminBookService.deleteBookById(id);
     }
