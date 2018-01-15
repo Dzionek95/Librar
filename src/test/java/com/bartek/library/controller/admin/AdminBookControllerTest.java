@@ -17,6 +17,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,19 +34,15 @@ public class AdminBookControllerTest {
     @Test
     public void shouldReturnOneBookBySavingBook() throws Exception {
         //given
-        Book dummyBook = Book
-                .builder()
-                .author("Mieszko I")
-                .title("Jak ochrzcic Polske")
-                .category("Poradniki")
-                .available(true)
-                .build();
+        Book dummyBook = createBookData();
 
         String jsonResponse = "{\"id\":0,\"title\":\"Jak ochrzcic Polske\",\"author\":\"Mieszko I\",\"category\":\"Poradniki\",\"available\":true}";
         //when
         when(adminBookService.saveBook(any())).thenReturn(dummyBook);
         //then
-        Assert.assertEquals(mockMvc.perform(post("/admin/book/save").contentType(MediaType.APPLICATION_JSON_UTF8).content(new ObjectMapper().writeValueAsString(dummyBook)))
+        Assert.assertEquals(mockMvc.perform(post("/admin/book/save")
+                                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                                        .content(new ObjectMapper().writeValueAsString(dummyBook)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andReturn().getResponse().getContentAsString(), jsonResponse);
@@ -61,4 +58,34 @@ public class AdminBookControllerTest {
 
         verify(adminBookService, times(1)).deleteBookById(any());
     }
+
+    @Test
+    public void shouldReturnOneBookByUpdateBook() throws Exception {
+        //given
+        Book dummyBook = createBookData();
+
+        String response = "{\"id\":0,\"title\":\"Jak ochrzcic Polske\",\"author\":\"Mieszko I\",\"category\":\"Poradniki\",\"available\":true}";
+        //when
+        when(adminBookService.updateBooks(any())).thenReturn(dummyBook);
+        //then
+        Assert.assertEquals(mockMvc.perform(put("/admin/book/update")
+                                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                                        .content(new ObjectMapper().writeValueAsString(dummyBook)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andReturn().getResponse().getContentAsString(), response);
+
+        verify(adminBookService, times(1)).updateBooks(any());
+    }
+
+    private Book createBookData() {
+        return Book
+                .builder()
+                .author("Mieszko I")
+                .title("Jak ochrzcic Polske")
+                .category("Poradniki")
+                .available(true)
+                .build();
+    }
+
 }
