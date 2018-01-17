@@ -2,6 +2,7 @@ package com.bartek.library.service;
 
 import com.bartek.library.model.Book;
 import com.bartek.library.model.BookRental;
+import com.bartek.library.model.OrdersQueue;
 import com.bartek.library.repository.BookRentalRepository;
 import com.bartek.library.repository.BookRepository;
 import com.bartek.library.repository.OrdersQueueRepository;
@@ -83,6 +84,26 @@ public class BookRentalServiceTest {
         Assert.assertEquals(bookRentalService.rentBook(1L), dummyBookRental);
         verify(securityUtilities, times(1)).retrieveNameFromAuthentication();
         verify(rentBookRepository, times(1)).save(any(BookRental.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldCreateQueueObjectAndThrowException(){
+        //given
+
+        Book dummyBook = Book.builder()
+                .author("Henryk Sienkiewicz")
+                .title("Krzyżacy")
+                .category("powieść historyczna")
+                .available(false)
+                .build();
+
+        //when
+        when(bookRepository.findOne(anyLong())).thenReturn(dummyBook);
+        when(securityUtilities.retrieveNameFromAuthentication()).thenReturn("Dzionek95");
+        //then
+        bookRentalService.rentBook(anyLong());
+        verify(bookRepository, times(1)).findOne(anyLong());
+        verify(ordersQueueRepository, times(1)).save(any(OrdersQueue.class));
     }
 
 }

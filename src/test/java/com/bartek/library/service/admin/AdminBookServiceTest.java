@@ -49,9 +49,10 @@ public class AdminBookServiceTest {
         //when
         when(bookRepository.save(dummyBook)).thenReturn(dummyBook);
         //then
-        Assert.assertEquals(dummyBook, adminBookService.saveBook(dummyBook));
+        Assert.assertEquals(dummyBook, adminBookService.updateBooks(dummyBook));
         verify(bookRepository, times(1)).save(any(Book.class));
     }
+
 
     private Book createBookData() {
         return Book.builder()
