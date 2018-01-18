@@ -17,12 +17,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -75,11 +73,11 @@ public class AdminNewBookPurchaseRequestControllerTest {
         //when
         when(adminNewBookPurchaseRequestService.acknowledgePurchaseRequest(anyLong())).thenReturn(dummyNewBookPurchaseRequest);
         //then
-        Assert.assertEquals(mockMvc.perform(post("/admin/purchase/acknowledge?id=1")
-                                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                                        .content(new ObjectMapper().writeValueAsString(dummyNewBookPurchaseRequest)))
+        Assert.assertEquals(response, mockMvc.perform(post("/admin/purchase/acknowledge?id=1")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(dummyNewBookPurchaseRequest)))
                 .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString(),response);
+                .andReturn().getResponse().getContentAsString());
     }
 
 

@@ -10,13 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.bartek.library.controller.BookRentalController.RENTAL_PATH;
-
 @RestController
-@RequestMapping(RENTAL_PATH)
+@RequestMapping("/rental")
 public class BookRentalController {
-
-    final static String RENTAL_PATH = "/rental";
 
     private BookRentalService bookRentalService;
 

@@ -51,11 +51,11 @@ public class NewBookPurchaseRequestControllerTest {
         //when
         when(newBookPurchaseRequestService.createNewBookRequest(any())).thenReturn(dummyPurchaseRequest);
         //then
-        Assert.assertEquals(mockMvc.perform(post("/purchase/save")
+        Assert.assertEquals(expectedResponse, mockMvc.perform(post("/purchase/save")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(new ObjectMapper().writeValueAsString(dummyPurchaseRequest)))
                 .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString(), expectedResponse);
+                .andReturn().getResponse().getContentAsString());
     }
 
 }

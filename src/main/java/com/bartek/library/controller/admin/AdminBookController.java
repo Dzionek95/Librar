@@ -7,13 +7,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import static com.bartek.library.controller.admin.AdminBookController.ADMIN_BOOK_PATH;
-
 @RestController
-@RequestMapping(value = ADMIN_BOOK_PATH)
+@RequestMapping(value = "/admin/book")
 public class AdminBookController {
-
-    static final String ADMIN_BOOK_PATH = "/admin/book";
 
     private AdminBookService adminBookService;
 

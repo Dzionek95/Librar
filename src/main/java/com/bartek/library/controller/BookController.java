@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.bartek.library.controller.BookController.BOOK_PATH;
-
 @RestController
-@RequestMapping(BOOK_PATH)
+@RequestMapping("/book")
 public class BookController {
-
-    static final String BOOK_PATH = "/book";
 
     private BookService bookService;
 

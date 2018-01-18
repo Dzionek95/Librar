@@ -10,13 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.bartek.library.controller.OrdersQueueController.QUEUE_PATH;
-
 @RestController
-@RequestMapping(QUEUE_PATH)
+@RequestMapping("/ordersqueue")
 public class OrdersQueueController {
-
-    final static String QUEUE_PATH = "/ordersqueue";
 
     private OrdersQueueService ordersQueueService;
 

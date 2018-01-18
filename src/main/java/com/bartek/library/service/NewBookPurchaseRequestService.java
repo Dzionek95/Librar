@@ -53,7 +53,7 @@ public class NewBookPurchaseRequestService {
                         .equalsIgnoreCase(bookRequest.getTitle()))
                 .collect(Collectors.toList());
 
-        return allBooksThatMatchBookRequest.size() == 0;
+        return allBooksThatMatchBookRequest.isEmpty();
     }
 
     private boolean checkIfSuchRequestHasBeenAlreadyCreated(NewBookPurchaseRequest bookRequest) {
@@ -64,7 +64,7 @@ public class NewBookPurchaseRequestService {
                 .filter(newRequestToCheck -> newRequestToCheck.equals(bookRequest))
                 .collect(Collectors.toList());
 
-        return allRequestsThatAreEqual.size() == 0;
+        return allRequestsThatAreEqual.isEmpty();
     }
 
     private List<NewBookPurchaseRequest> findAllBookRequests() {

@@ -66,7 +66,7 @@ public class NewBookPurchaseRequestServiceTest {
         when(newBookPurchaseRequestRepository.findAll()).thenReturn(Collections.emptyList());
         when(securityUtilities.retrieveNameFromAuthentication()).thenReturn("Zbyszek");
         //then
-        Assert.assertEquals(newBookPurchaseRequestService.createNewBookRequest(dummyPurchaseRequest), dummyPurchaseRequest);
+        Assert.assertEquals(dummyPurchaseRequest, newBookPurchaseRequestService.createNewBookRequest(dummyPurchaseRequest));
     }
 
 }

@@ -44,7 +44,7 @@ public class AccountsServiceTest {
         //when
         when(accountRepository.save(any(Account.class))).thenReturn(dummyAccount);
         //then
-        Assert.assertEquals(accountsService.updateAccount(dummyAccount), dummyAccount);
+        Assert.assertEquals(dummyAccount, accountsService.updateAccount(dummyAccount));
         verify(accountRepository, times(1)).save(any(Account.class));
     }
 

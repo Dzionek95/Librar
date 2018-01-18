@@ -6,13 +6,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import static com.bartek.library.controller.admin.AccountsController.ADMIN_ACCOUNTS_PATH;
-
 @RestController
-@RequestMapping(ADMIN_ACCOUNTS_PATH)
+@RequestMapping("/admin/accounts")
 public class AccountsController {
-
-    static final String ADMIN_ACCOUNTS_PATH = "/admin/accounts";
 
     private AccountsService accountsService;
 

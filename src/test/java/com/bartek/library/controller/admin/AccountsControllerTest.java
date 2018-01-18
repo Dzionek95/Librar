@@ -42,13 +42,13 @@ public class AccountsControllerTest {
         when(accountsService.createAccount(any())).thenReturn(dummyAccount);
 
         //then
-        Assert.assertEquals(
+        Assert.assertEquals(expectedResponse,
                 mockMvc.perform(post("/admin/accounts/create")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(objectMapper.writeValueAsString(dummyAccount)))
                         .andExpect(status().isOk())
                         .andReturn()
-                        .getResponse().getContentAsString(), expectedResponse);
+                        .getResponse().getContentAsString());
 
         verify(accountsService, times(1)).createAccount(any());
     }
@@ -72,11 +72,11 @@ public class AccountsControllerTest {
         //when
         when(accountsService.updateAccount(any())).thenReturn(dummyAccount);
         //then
-        Assert.assertEquals(mockMvc.perform(put("/admin/accounts/update")
+        Assert.assertEquals(expectedResponse, mockMvc.perform(put("/admin/accounts/update")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(new ObjectMapper().writeValueAsString(dummyAccount)))
                 .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString(), expectedResponse);
+                .andReturn().getResponse().getContentAsString());
 
         verify(accountsService, times(1)).updateAccount(any());
     }

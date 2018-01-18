@@ -9,14 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.bartek.library.controller.NewBookPurchaseRequestController.NEW_BOOK_PURCHASE_REQUEST_PATH;
-
 
 @RestController
-@RequestMapping(NEW_BOOK_PURCHASE_REQUEST_PATH)
+@RequestMapping("/purchase")
 public class NewBookPurchaseRequestController {
-
-    final static String NEW_BOOK_PURCHASE_REQUEST_PATH = "/purchase";
 
     private NewBookPurchaseRequestService newBookPurchaseRequestService;
 

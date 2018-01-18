@@ -59,7 +59,10 @@ public class BookRentalControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 
-        Assert.assertEquals(mockMvc.perform(post("/rental/rent?id=1")).andReturn().getResponse().getContentAsString(), response);
+        Assert.assertEquals(response, mockMvc.perform(post("/rental/rent?id=1"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString());
         verify(bookRentalService, times(2)).rentBook(any());
     }
 
@@ -81,7 +84,10 @@ public class BookRentalControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 
-        Assert.assertEquals(mockMvc.perform(post("/rental/return?id=1")).andReturn().getResponse().getContentAsString(), response);
+        Assert.assertEquals(response, mockMvc.perform(post("/rental/return?id=1"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString());
         verify(bookRentalService, times(2)).returnBook(any());
     }
 

@@ -54,7 +54,7 @@ public class BookRentalServiceTest {
         //when
         when(rentBookRepository.findOne(any())).thenReturn(dummyBookRental);
         //then
-        Assert.assertEquals(bookRentalService.returnBook(any()).isAvailable(), true);
+        Assert.assertEquals(true, bookRentalService.returnBook(any()).isAvailable());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class BookRentalServiceTest {
         when(bookRepository.findOne(any())).thenReturn(dummyBook);
 
         //then
-        Assert.assertEquals(bookRentalService.rentBook(1L), dummyBookRental);
+        Assert.assertEquals(dummyBookRental, bookRentalService.rentBook(1L));
         verify(securityUtilities, times(1)).retrieveNameFromAuthentication();
         verify(rentBookRepository, times(1)).save(any(BookRental.class));
     }

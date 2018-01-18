@@ -7,13 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.bartek.library.controller.admin.AdminNewBookPurchaseRequestController.ADMIN_NEW_BOOK_REQUEST;
-
 @RestController
-@RequestMapping(ADMIN_NEW_BOOK_REQUEST)
+@RequestMapping("/admin/purchase")
 public class AdminNewBookPurchaseRequestController {
-
-    static final String ADMIN_NEW_BOOK_REQUEST = "/admin/purchase";
 
     private AdminNewBookPurchaseRequestService adminNewBookPurchaseRequestService;
 

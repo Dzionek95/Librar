@@ -40,12 +40,12 @@ public class AdminBookControllerTest {
         //when
         when(adminBookService.saveBook(any())).thenReturn(dummyBook);
         //then
-        Assert.assertEquals(mockMvc.perform(post("/admin/book/save")
-                                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                                        .content(new ObjectMapper().writeValueAsString(dummyBook)))
+        Assert.assertEquals(jsonResponse, mockMvc.perform(post("/admin/book/save")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(dummyBook)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andReturn().getResponse().getContentAsString(), jsonResponse);
+                .andReturn().getResponse().getContentAsString());
 
         verify(adminBookService, times(1)).saveBook(any());
     }
@@ -68,12 +68,12 @@ public class AdminBookControllerTest {
         //when
         when(adminBookService.updateBooks(any())).thenReturn(dummyBook);
         //then
-        Assert.assertEquals(mockMvc.perform(put("/admin/book/update")
-                                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                                        .content(new ObjectMapper().writeValueAsString(dummyBook)))
+        Assert.assertEquals(response, mockMvc.perform(put("/admin/book/update")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(dummyBook)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andReturn().getResponse().getContentAsString(), response);
+                .andReturn().getResponse().getContentAsString());
 
         verify(adminBookService, times(1)).updateBooks(any());
     }
