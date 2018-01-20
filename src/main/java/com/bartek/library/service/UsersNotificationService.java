@@ -13,8 +13,8 @@ import java.util.List;
 @Service
 public class UsersNotificationService {
 
-    private final String BOOK_AVAILABILITY = "This book is now available for you: ";
-    private final int FIRST_PERSON_IN_QUEUE = 0;
+    private static final String BOOK_AVAILABILITY = "This book is now available for you: ";
+    private static final int FIRST_PERSON_IN_QUEUE = 0;
 
     private OrdersQueueService ordersQueueService;
     private UserNotificationRepository userNotificationRepository;
