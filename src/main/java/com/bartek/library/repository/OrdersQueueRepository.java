@@ -10,6 +10,9 @@ import java.util.List;
 
 @Repository
 public interface OrdersQueueRepository extends CrudRepository<OrdersQueue, Long> {
-    @Query(value = "Select * from QUEUE,BOOK where QUEUE.QUEUE_TO_BOOK_ID = BOOK.ID AND BOOK.ID =?1 ", nativeQuery = true)
+    @Query(value = "Select * from ORDERS_QUEUE,BOOK " +
+            "where ORDERS_QUEUE.QUEUE_TO_BOOK_ID = BOOK.ID " +
+            "AND BOOK.ID =?1 ", nativeQuery = true)
     List<OrdersQueue> findAllPeopleInQueue(Long idOfOrder);
+
 }

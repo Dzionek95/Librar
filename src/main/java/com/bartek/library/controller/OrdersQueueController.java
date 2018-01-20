@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,8 +24,8 @@ public class OrdersQueueController {
 
     @ApiOperation(value = "/display", notes = "Displaying queue of orders to particular book")
     @GetMapping("/display")
-    public List<OrdersQueue> displayQueueToBook(Long idOfBook) {
-        return ordersQueueService.displayQueueToBook(idOfBook);
+    public List<OrdersQueue> displayQueueToBook(@RequestParam Long id) {
+        return ordersQueueService.displayQueueToBook(id);
     }
 
 }

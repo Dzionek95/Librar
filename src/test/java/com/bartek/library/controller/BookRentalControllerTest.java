@@ -2,6 +2,8 @@ package com.bartek.library.controller;
 
 import com.bartek.library.model.Book;
 import com.bartek.library.model.BookRental;
+import com.bartek.library.model.accounts.Account;
+import com.bartek.library.model.accounts.Role;
 import com.bartek.library.service.BookRentalService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,6 +40,14 @@ public class BookRentalControllerTest {
 
         LocalDateTime dummyTime = LocalDateTime.parse("2018-01-10 20:59:42", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
+        Account dummyAccount = Account
+                .builder()
+                .username("username")
+                .password("password")
+                .role(Role.ROLE_READER)
+                .enabled(true)
+                .build();
+
         Book dummyBook = Book.builder()
                 .author("Henryk Sienkiewicz")
                 .title("Krzyżacy")
@@ -48,7 +58,7 @@ public class BookRentalControllerTest {
                 .book(dummyBook)
                 .dateOfRental(dummyTime)
                 .returnDate(dummyTime.plusMonths(1))
-                .rentedBy("Zbyszek")
+                .account(dummyAccount)
                 .build();
 
         String response = "{\"id\":0,\"rentedBy\":\"Zbyszek\",\"book\":{\"id\":0,\"title\":\"Krzy\u017Cacy\",\"author\":\"Henryk Sienkiewicz\",\"category\":\"powie\u015B\u0107 historyczna\",\"available\":false},\"dateOfRental\":\"2018-01-10 20:59:42\",\"returnDate\":\"2018-02-10 20:59:42\"}";

@@ -2,31 +2,28 @@ package com.bartek.library.model;
 
 import com.bartek.library.model.accounts.Account;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Data
 @Builder
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"id","dateOfRental","returnDate"})
-@Setter
-@Getter
-@Data
-public class BookRental {
+public class UserNotification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @OneToOne
     private Account account;
-    @OneToOne
-    private Book book;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime dateOfRental;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime returnDate;
+    private LocalDateTime timeOfCreationOfNotification;
+    private String message;
 
 }

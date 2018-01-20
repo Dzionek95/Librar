@@ -3,6 +3,8 @@ package com.bartek.library.service;
 import com.bartek.library.model.Book;
 import com.bartek.library.model.BookRental;
 import com.bartek.library.model.OrdersQueue;
+import com.bartek.library.model.accounts.Account;
+import com.bartek.library.model.accounts.Role;
 import com.bartek.library.repository.BookRentalRepository;
 import com.bartek.library.repository.BookRepository;
 import com.bartek.library.repository.OrdersQueueRepository;
@@ -27,7 +29,7 @@ public class BookRentalServiceTest {
     @Mock
     private BookRepository bookRepository;
     @Mock
-    private OrdersQueueRepository ordersQueueRepository;
+    private OrdersQueueService ordersQueueService;
     @Mock
     private SecurityUtilities securityUtilities;
 
@@ -39,6 +41,14 @@ public class BookRentalServiceTest {
         //given
         LocalDateTime dummyTime = LocalDateTime.parse("2018-01-10 20:59:42", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
+        Account dummyAccount = Account
+                .builder()
+                .username("username")
+                .password("password")
+                .role(Role.ROLE_READER)
+                .enabled(true)
+                .build();
+
         Book dummyBook = Book.builder()
                 .author("Henryk Sienkiewicz")
                 .title("Krzyżacy")
@@ -49,7 +59,7 @@ public class BookRentalServiceTest {
                 .book(dummyBook)
                 .dateOfRental(dummyTime)
                 .returnDate(dummyTime.plusMonths(1))
-                .rentedBy("Zbyszek")
+                .account(dummyAccount)
                 .build();
         //when
         when(rentBookRepository.findOne(any())).thenReturn(dummyBookRental);
@@ -62,6 +72,14 @@ public class BookRentalServiceTest {
         //given
         LocalDateTime dummyTime = LocalDateTime.parse("2018-01-10 20:59:42", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
+        Account dummyAccount = Account
+                .builder()
+                .username("username")
+                .password("password")
+                .role(Role.ROLE_READER)
+                .enabled(true)
+                .build();
+
         Book dummyBook = Book.builder()
                 .author("Henryk Sienkiewicz")
                 .title("Krzyżacy")
@@ -73,7 +91,7 @@ public class BookRentalServiceTest {
                 .book(dummyBook)
                 .dateOfRental(dummyTime)
                 .returnDate(dummyTime.plusMonths(1))
-                .rentedBy("Zbyszek")
+                .account(dummyAccount)
                 .build();
 
         //when
@@ -87,9 +105,8 @@ public class BookRentalServiceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void shouldCreateQueueObjectAndThrowException(){
+    public void shouldCreateQueueObjectAndThrowException() {
         //given
-
         Book dummyBook = Book.builder()
                 .author("Henryk Sienkiewicz")
                 .title("Krzyżacy")
@@ -103,7 +120,8 @@ public class BookRentalServiceTest {
         //then
         bookRentalService.rentBook(anyLong());
         verify(bookRepository, times(1)).findOne(anyLong());
-        verify(ordersQueueRepository, times(1)).save(any(OrdersQueue.class));
+        verify(ordersQueueService, times(1))
+                .placeAnOrderToQueue(any(Book.class), any(String.class));
     }
 
 }
