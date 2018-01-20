@@ -2,12 +2,11 @@ package com.bartek.library.service;
 
 import com.bartek.library.model.Book;
 import com.bartek.library.model.BookRental;
-import com.bartek.library.model.OrdersQueue;
 import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.accounts.Role;
 import com.bartek.library.repository.BookRentalRepository;
 import com.bartek.library.repository.BookRepository;
-import com.bartek.library.repository.OrdersQueueRepository;
+import com.bartek.library.repository.admin.AccountRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +31,10 @@ public class BookRentalServiceTest {
     private OrdersQueueService ordersQueueService;
     @Mock
     private SecurityUtilities securityUtilities;
+    @Mock
+    private AccountRepository accountRepository;
+    @Mock
+    private UsersNotificationService usersNotificationService;
 
     @InjectMocks
     private BookRentalService bookRentalService;
@@ -62,9 +65,11 @@ public class BookRentalServiceTest {
                 .account(dummyAccount)
                 .build();
         //when
+        when(accountRepository.findOneByUsername(anyString())).thenReturn(dummyAccount);
         when(rentBookRepository.findOne(any())).thenReturn(dummyBookRental);
         //then
         Assert.assertEquals(true, bookRentalService.returnBook(any()).isAvailable());
+        verify(usersNotificationService, times(1)).notifyUserThatBookIsAbleToRent(anyLong());
     }
 
     @Test
@@ -96,6 +101,7 @@ public class BookRentalServiceTest {
 
         //when
         when(securityUtilities.retrieveNameFromAuthentication()).thenReturn("Zbyszek");
+        when(accountRepository.findOneByUsername(anyString())).thenReturn(dummyAccount);
         when(bookRepository.findOne(any())).thenReturn(dummyBook);
 
         //then

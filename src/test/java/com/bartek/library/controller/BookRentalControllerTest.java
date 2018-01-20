@@ -61,7 +61,7 @@ public class BookRentalControllerTest {
                 .account(dummyAccount)
                 .build();
 
-        String response = "{\"id\":0,\"rentedBy\":\"Zbyszek\",\"book\":{\"id\":0,\"title\":\"Krzy\u017Cacy\",\"author\":\"Henryk Sienkiewicz\",\"category\":\"powie\u015B\u0107 historyczna\",\"available\":false},\"dateOfRental\":\"2018-01-10 20:59:42\",\"returnDate\":\"2018-02-10 20:59:42\"}";
+        String response = "{\"id\":0,\"account\":{\"id\":0,\"username\":\"username\",\"password\":\"password\",\"role\":\"ROLE_READER\",\"enabled\":true},\"book\":{\"id\":0,\"title\":\"Krzyżacy\",\"author\":\"Henryk Sienkiewicz\",\"category\":\"powieść historyczna\",\"available\":false},\"dateOfRental\":\"2018-01-10 20:59:42\",\"returnDate\":\"2018-02-10 20:59:42\"}";
         //when
         when(bookRentalService.rentBook(any())).thenReturn(dummyBookRental);
         //then

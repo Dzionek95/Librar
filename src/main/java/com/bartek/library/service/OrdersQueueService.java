@@ -25,7 +25,7 @@ public class OrdersQueueService {
         return ordersQueueRepository.findAllPeopleInQueue(idOfBook);
     }
 
-    OrdersQueue placeAnOrderToQueue(Book bookToOrder, String user) {
+    public OrdersQueue placeAnOrderToQueue(Book bookToOrder, String user) {
         checkIfPersonIsAlreadyIsInQueue
                 (ordersQueueRepository.findAllPeopleInQueue(bookToOrder.getId()), user);
 

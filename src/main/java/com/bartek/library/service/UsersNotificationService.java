@@ -8,7 +8,6 @@ import com.bartek.library.repository.admin.AccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,7 +39,7 @@ public class UsersNotificationService {
                 .findAllNotificationsForUser(userAccount.getId());
     }
 
-    void notifyUserThatBookIsAbleToRent(Long idOfBook) {
+    public void notifyUserThatBookIsAbleToRent(Long idOfBook) {
         List<OrdersQueue> ordersList =
                 ordersQueueService.displayQueueToBook(idOfBook);
 

@@ -68,7 +68,7 @@ public class OrdersQueueControllerTest {
         when(ordersQueueService.displayQueueToBook(any()))
                 .thenReturn(Arrays.asList(dummyOrdersQueue, dummyOrdersQueue2));
         //then
-        mockMvc.perform(get("/ordersqueue/display"))
+        mockMvc.perform(get("/ordersqueue/display?id=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$", hasSize(2)))

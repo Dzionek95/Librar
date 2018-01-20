@@ -5,6 +5,7 @@ import com.bartek.library.model.OrdersQueue;
 import com.bartek.library.repository.OrdersQueueRepository;
 import com.google.common.collect.Lists;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,7 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,32 +28,38 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class OrdersQueueServiceTest {
 
+    private LocalDateTime dummyTime;
+    private Book dummyBook;
+    private OrdersQueue dummyOrdersQueue;
+
     @Mock
     private OrdersQueueRepository ordersQueueRepository;
 
     @InjectMocks
     private OrdersQueueService ordersQueueService;
 
-    @Test
-    public void shouldReturnListOfTwoOrdersQueue() {
-        //given
+    @Before
+    public void setUpData(){
+        this.dummyTime = LocalDateTime.parse("2018-01-10 20:59:42", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        LocalDateTime dummyTime = LocalDateTime.parse("2018-01-10 20:59:42", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
-        Book dummyBook = Book.builder()
+        this.dummyBook = Book.builder()
                 .author("Mieszko I")
                 .title("Jak ochrzcic Polske")
                 .category("Poradniki")
                 .available(true)
                 .build();
 
-        OrdersQueue dummyOrdersQueue = OrdersQueue
+        this.dummyOrdersQueue = OrdersQueue
                 .builder()
                 .queueToBook(dummyBook)
                 .timeOfJoiningQueue(dummyTime)
                 .username("Dzionek95")
                 .build();
+    }
 
+    @Test
+    public void shouldReturnListOfTwoOrdersQueue() {
+        //given
         OrdersQueue dummyOrdersQueue2 = OrdersQueue
                 .builder()
                 .queueToBook(dummyBook)
@@ -64,4 +73,22 @@ public class OrdersQueueServiceTest {
         verify(ordersQueueRepository, times(1)).findAllPeopleInQueue(anyLong());
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void shouldThrowExceptionThatInformThatUserIsInQueue() {
+        //given
+        //when
+        when(ordersQueueRepository.findAllPeopleInQueue(anyLong())).thenReturn(Arrays.asList(dummyOrdersQueue));
+        //then
+        ordersQueueService.placeAnOrderToQueue(dummyBook, "Dzionek95");
+    }
+
+    @Test
+    public void shouldExecuteSavingOrderToRepositoryOnce() {
+        //given
+        //when
+        when(ordersQueueRepository.findAllPeopleInQueue(anyLong())).thenReturn(Collections.emptyList());
+        //then
+        ordersQueueService.placeAnOrderToQueue(dummyBook, "Dzionek95");
+        verify(ordersQueueRepository, times(1)).save(any(OrdersQueue.class));
+    }
 }
