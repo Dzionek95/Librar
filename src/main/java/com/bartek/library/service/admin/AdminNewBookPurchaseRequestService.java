@@ -1,9 +1,9 @@
 package com.bartek.library.service.admin;
 
-import com.bartek.library.model.Book;
-import com.bartek.library.model.NewBookPurchaseRequest;
-import com.bartek.library.repository.BookRepository;
-import com.bartek.library.repository.NewBookPurchaseRequestRepository;
+import com.bartek.library.model.book.Book;
+import com.bartek.library.model.book.NewBookPurchaseRequest;
+import com.bartek.library.repository.book.BookRepository;
+import com.bartek.library.repository.book.NewBookPurchaseRequestRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,13 +41,12 @@ public class AdminNewBookPurchaseRequestService {
     }
 
     private void saveNewBookToDb(NewBookPurchaseRequest newBookPurchaseRequest) {
-        Book book = Book
+        bookRepository.save(Book
                 .builder()
                 .title(newBookPurchaseRequest.getTitle())
                 .author(newBookPurchaseRequest.getAuthor())
                 .available(true)
                 .category(newBookPurchaseRequest.getCategory())
-                .build();
-        bookRepository.save(book);
+                .build());
     }
 }

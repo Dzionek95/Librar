@@ -1,7 +1,7 @@
 package com.bartek.library.controller.admin;
 
 
-import com.bartek.library.model.Book;
+import com.bartek.library.model.book.Book;
 import com.bartek.library.service.admin.AdminBookService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

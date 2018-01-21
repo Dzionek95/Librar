@@ -1,7 +1,7 @@
 package com.bartek.library.controller.admin;
 
 import com.bartek.library.model.accounts.Account;
-import com.bartek.library.service.AccountsService;
+import com.bartek.library.service.admin.AccountsService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

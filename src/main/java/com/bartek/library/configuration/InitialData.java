@@ -1,9 +1,9 @@
 package com.bartek.library.configuration;
 
-import com.bartek.library.model.Book;
+import com.bartek.library.model.book.Book;
 import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.accounts.Role;
-import com.bartek.library.repository.BookRepository;
+import com.bartek.library.repository.book.BookRepository;
 import com.bartek.library.repository.admin.AccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;

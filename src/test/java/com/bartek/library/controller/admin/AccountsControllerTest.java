@@ -2,7 +2,7 @@ package com.bartek.library.controller.admin;
 
 import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.accounts.Role;
-import com.bartek.library.service.AccountsService;
+import com.bartek.library.service.admin.AccountsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.bartek.library.controller.admin;
 
-import com.bartek.library.model.Book;
+import com.bartek.library.model.book.Book;
 import com.bartek.library.service.admin.AdminBookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;

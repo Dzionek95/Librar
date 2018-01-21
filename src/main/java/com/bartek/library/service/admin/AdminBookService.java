@@ -1,7 +1,7 @@
 package com.bartek.library.service.admin;
 
-import com.bartek.library.model.Book;
-import com.bartek.library.repository.BookRepository;
+import com.bartek.library.model.book.Book;
+import com.bartek.library.repository.book.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

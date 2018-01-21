@@ -4,9 +4,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
-class SecurityUtilities {
+public class SecurityUtilities {
 
-    String retrieveNameFromAuthentication() {
+    public String retrieveNameFromAuthentication() {
         return SecurityContextHolder
                 .getContext()
                 .getAuthentication()
