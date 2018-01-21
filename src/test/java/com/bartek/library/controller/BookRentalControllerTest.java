@@ -37,7 +37,6 @@ public class BookRentalControllerTest {
     @Test
     public void shouldReturnOneBookRental() throws Exception {
         //given
-
         LocalDateTime dummyTime = LocalDateTime.parse("2018-01-10 20:59:42", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         Account dummyAccount = Account
