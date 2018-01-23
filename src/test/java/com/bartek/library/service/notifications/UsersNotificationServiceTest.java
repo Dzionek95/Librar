@@ -1,21 +1,28 @@
 package com.bartek.library.service.notifications;
 
+import com.bartek.library.model.accounts.Account;
+import com.bartek.library.model.accounts.Role;
 import com.bartek.library.model.book.Book;
 import com.bartek.library.model.book.OrdersQueue;
+import com.bartek.library.model.notifications.NotificationType;
 import com.bartek.library.model.notifications.UserNotification;
 import com.bartek.library.repository.notifications.UserNotificationRepository;
 import com.bartek.library.repository.admin.AccountRepository;
 import com.bartek.library.service.SecurityUtilities;
 import com.bartek.library.service.book.OrdersQueueService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -60,6 +67,87 @@ public class UsersNotificationServiceTest {
         verify(ordersQueueService, times(1)).displayQueueToBook(anyLong());
         verify(userNotificationRepository, times(1)).save(any(UserNotification.class));
         verify(accountRepository, times(1)).findOneByUsername(anyString());
+    }
+
+    @Test
+    public void shouldSavePunishmentUserNotificationToDataBase() {
+        //given
+        ArgumentCaptor<UserNotification> argumentCaptor = ArgumentCaptor.forClass(UserNotification.class);
+
+        Account dummyAccount = Account
+                .builder()
+                .username("username")
+                .password("password")
+                .role(Role.ROLE_READER)
+                .enabled(true)
+                .build();
+
+        //verify
+        usersNotificationService.notifyUserAboutPunishment(dummyAccount, 100);
+        verify(userNotificationRepository, times(1)).save(argumentCaptor.capture());
+        Assert.assertEquals(argumentCaptor.getValue().getMessage(), "You have to pay for delays in book reurn: 100.0");
+        Assert.assertEquals(argumentCaptor.getValue().getNotificationType(), NotificationType.PUNISHMENT);
+
+    }
+
+    @Test
+    public void shouldSavePunishmentUserNotificationToDatabaseAfterUpdatingNotification() {
+        //given
+        ArgumentCaptor<UserNotification> argumentCaptor = ArgumentCaptor.forClass(UserNotification.class);
+
+        Account dummyAccount = Account
+                .builder()
+                .username("username")
+                .password("password")
+                .role(Role.ROLE_READER)
+                .enabled(true)
+                .build();
+
+        UserNotification dummyNotification = UserNotification
+                .builder()
+                .account(dummyAccount)
+                .message("You have to pay for delays in book reurn: 50.0")
+                .build();
+        //when
+        when(userNotificationRepository.findPunishmentNotificationForUser(anyLong())).thenReturn(dummyNotification);
+        //then
+        usersNotificationService.notifyUserAboutPunishment(dummyAccount, 100.5);
+        verify(userNotificationRepository, times(1)).save(argumentCaptor.capture());
+        Assert.assertEquals(argumentCaptor.getValue().getMessage(), "You have to pay for delays in book reurn: 100.5");
+    }
+
+    @Test
+    public void shouldReturnListOfTwoUserNotifications() {
+        //given
+
+        Account dummyAccount = Account
+                .builder()
+                .username("username")
+                .password("password")
+                .role(Role.ROLE_READER)
+                .enabled(true)
+                .build();
+
+        UserNotification dummyNotification = UserNotification
+                .builder()
+                .account(dummyAccount)
+                .message("You have to pay for delays in book reurn: 50.0")
+                .build();
+
+        UserNotification dummyNotification2 = UserNotification
+                .builder()
+                .account(dummyAccount)
+                .message("You have to pay for delays in book reurn: 50.0")
+                .build();
+        //when
+        when(userNotificationRepository.findAllNotificationsForUser(anyLong()))
+                .thenReturn(Arrays.asList(dummyNotification, dummyNotification2));
+        when(securityUtilities.retrieveNameFromAuthentication())
+                .thenReturn("Dzionek95");
+        when(accountRepository.findOneByUsername(anyString()))
+                .thenReturn(dummyAccount);
+        //then
+        Assert.assertEquals(2, usersNotificationService.getUsersAllNotifications().size());
     }
 
 }
