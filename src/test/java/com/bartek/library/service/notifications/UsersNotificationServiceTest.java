@@ -85,8 +85,8 @@ public class UsersNotificationServiceTest {
         //verify
         usersNotificationService.notifyUserAboutPunishment(dummyAccount, 100);
         verify(userNotificationRepository, times(1)).save(argumentCaptor.capture());
-        Assert.assertEquals(argumentCaptor.getValue().getMessage(), "You have to pay for delays in book reurn: 100.0");
-        Assert.assertEquals(argumentCaptor.getValue().getNotificationType(), NotificationType.PUNISHMENT);
+        Assert.assertEquals("You have to pay for delays in book reurn: 100.0", argumentCaptor.getValue().getMessage());
+        Assert.assertEquals(NotificationType.PUNISHMENT, argumentCaptor.getValue().getNotificationType());
 
     }
 
@@ -113,7 +113,7 @@ public class UsersNotificationServiceTest {
         //then
         usersNotificationService.notifyUserAboutPunishment(dummyAccount, 100.5);
         verify(userNotificationRepository, times(1)).save(argumentCaptor.capture());
-        Assert.assertEquals(argumentCaptor.getValue().getMessage(), "You have to pay for delays in book reurn: 100.5");
+        Assert.assertEquals("You have to pay for delays in book reurn: 100.5", argumentCaptor.getValue().getMessage());
     }
 
     @Test
