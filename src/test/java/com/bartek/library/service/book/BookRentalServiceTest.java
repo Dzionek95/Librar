@@ -4,9 +4,11 @@ import com.bartek.library.model.book.Book;
 import com.bartek.library.model.book.BookRental;
 import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.accounts.Role;
+import com.bartek.library.model.notifications.Penalty;
 import com.bartek.library.repository.book.BookRentalRepository;
 import com.bartek.library.repository.book.BookRepository;
 import com.bartek.library.repository.admin.AccountRepository;
+import com.bartek.library.repository.notifications.PenaltyRepository;
 import com.bartek.library.service.SecurityUtilities;
 import com.bartek.library.service.notifications.UsersNotificationService;
 import org.junit.Assert;
@@ -18,6 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -37,6 +40,8 @@ public class BookRentalServiceTest {
     private AccountRepository accountRepository;
     @Mock
     private UsersNotificationService usersNotificationService;
+    @Mock
+    private PenaltyRepository penaltyRepository;
 
     @InjectMocks
     private BookRentalService bookRentalService;
@@ -69,6 +74,7 @@ public class BookRentalServiceTest {
         //when
         when(accountRepository.findOneByUsername(anyString())).thenReturn(dummyAccount);
         when(rentBookRepository.findOne(any())).thenReturn(dummyBookRental);
+        when(penaltyRepository.findPenaltyByAccountId(anyLong())).thenReturn(null);
         //then
         Assert.assertEquals(true, bookRentalService.returnBook(any()).isAvailable());
         verify(usersNotificationService, times(1)).notifyUserThatBookIsAbleToRent(anyLong());
