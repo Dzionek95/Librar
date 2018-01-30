@@ -6,8 +6,8 @@ import com.bartek.library.model.book.Book;
 import com.bartek.library.model.book.OrdersQueue;
 import com.bartek.library.model.notifications.NotificationType;
 import com.bartek.library.model.notifications.UserNotification;
-import com.bartek.library.repository.notifications.UserNotificationRepository;
 import com.bartek.library.repository.admin.AccountRepository;
+import com.bartek.library.repository.notifications.UserNotificationRepository;
 import com.bartek.library.service.SecurityUtilities;
 import com.bartek.library.service.book.OrdersQueueService;
 import org.junit.Assert;
@@ -17,12 +17,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Optional;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
