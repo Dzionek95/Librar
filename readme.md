@@ -1,9 +1,9 @@
-#**Library**
+# **Library**
 
-###Goal:
+### Goal:
 It's main purpose is to practise my Java and Spring Boot skills and get more familiar with various libraries
 
-###How to run:
+### How to run:
 * You need to have Java 8 (or higher) and Maven 3(or higher) installed
 * To start application execute `mvn spring-boot:run`
 * To start tests only execute `mvn surefire:test`
@@ -13,7 +13,7 @@ access is only for Admin account (login: Admin, password:Admin)
     * `mvn clean install site`
     * `mvn sonar:sonar` (before you need to start SonarQube server- default `localhost:9000`)
 
-###About the application itself
+### About the application itself
 * App is divided into Admin and Reader part
 * Admin is able to do following: 
     * Manage accounts (CRUD)
@@ -32,7 +32,7 @@ access is only for Admin account (login: Admin, password:Admin)
     * Code Coverage- 91.8% (Without Models, Configurations(Beans), Repositories -> Only business logic: services and controllers)
     * Duplications-  0.0%   
     
-###Technologies that has been used:
+### Technologies that has been used:
 * Java 
 * Maven 
 * Spring Boot
