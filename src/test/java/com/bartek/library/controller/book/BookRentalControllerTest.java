@@ -1,10 +1,11 @@
 package com.bartek.library.controller.book;
 
-import com.bartek.library.model.book.Book;
-import com.bartek.library.model.book.BookRental;
 import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.accounts.Role;
-import com.bartek.library.service.book.BookRentalService;
+import com.bartek.library.model.book.Book;
+import com.bartek.library.model.book.BookRental;
+import com.bartek.library.service.book.rental.RentBookService;
+import com.bartek.library.service.book.rental.ReturnBookService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +33,10 @@ public class BookRentalControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private BookRentalService bookRentalService;
+    private ReturnBookService returnBookService;
+
+    @MockBean
+    private RentBookService rentBookService;
 
     @Test
     public void shouldReturnOneBookRental() throws Exception {
@@ -62,7 +66,7 @@ public class BookRentalControllerTest {
 
         String response = "{\"id\":0,\"account\":{\"id\":0,\"username\":\"username\",\"password\":\"password\",\"role\":\"ROLE_READER\",\"enabled\":true},\"book\":{\"id\":0,\"title\":\"Krzyżacy\",\"author\":\"Henryk Sienkiewicz\",\"category\":\"powieść historyczna\",\"available\":false},\"dateOfRental\":\"2018-01-10 20:59:42\",\"returnDate\":\"2018-02-10 20:59:42\"}";
         //when
-        when(bookRentalService.rentBook(any())).thenReturn(dummyBookRental);
+        when(rentBookService.rentBook(any())).thenReturn(dummyBookRental);
         //then
         mockMvc.perform(post("/rental/rent?id=1"))
                 .andExpect(status().isOk())
@@ -72,7 +76,7 @@ public class BookRentalControllerTest {
                 .andReturn()
                 .getResponse()
                 .getContentAsString());
-        verify(bookRentalService, times(2)).rentBook(any());
+        verify(rentBookService, times(2)).rentBook(any());
     }
 
     @Test
@@ -86,7 +90,7 @@ public class BookRentalControllerTest {
                 .build();
         String response = "{\"id\":0,\"title\":\"Krzyżacy\",\"author\":\"Henryk Sienkiewicz\",\"category\":\"powieść historyczna\",\"available\":true}";
         //when
-        when(bookRentalService.returnBook(any())).thenReturn(dummyBook);
+        when(returnBookService.returnBook(any())).thenReturn(dummyBook);
         //then
 
         mockMvc.perform(post("/rental/return?id=1"))
@@ -97,7 +101,7 @@ public class BookRentalControllerTest {
                 .andReturn()
                 .getResponse()
                 .getContentAsString());
-        verify(bookRentalService, times(2)).returnBook(any());
+        verify(returnBookService, times(2)).returnBook(any());
     }
 
 }

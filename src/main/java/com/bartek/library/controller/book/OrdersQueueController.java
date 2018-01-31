@@ -1,7 +1,7 @@
 package com.bartek.library.controller.book;
 
 import com.bartek.library.model.book.OrdersQueue;
-import com.bartek.library.service.book.OrdersQueueService;
+import com.bartek.library.service.book.rental.OrdersQueueService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

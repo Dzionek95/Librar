@@ -1,4 +1,4 @@
-package com.bartek.library.service.book;
+package com.bartek.library.service.book.rental;
 
 import com.bartek.library.model.book.Book;
 import com.bartek.library.model.book.OrdersQueue;
@@ -44,7 +44,6 @@ public class OrdersQueueService {
 
     private void checkIfPersonIsAlreadyIsInQueue(List<OrdersQueue> allPeopleInQueue, String user) {
         allPeopleInQueue
-                .stream()
                 .forEach(orderInQueue -> {
                     if (orderInQueue.getUsername().equals(user)) {
                         throw new IllegalStateException("You have already sign up in queue!");

@@ -6,7 +6,7 @@ import com.bartek.library.model.notifications.UserNotification;
 import com.bartek.library.model.accounts.Account;
 import com.bartek.library.repository.notifications.UserNotificationRepository;
 import com.bartek.library.repository.admin.AccountRepository;
-import com.bartek.library.service.book.OrdersQueueService;
+import com.bartek.library.service.book.rental.OrdersQueueService;
 import com.bartek.library.service.SecurityUtilities;
 import org.springframework.stereotype.Service;
 
