@@ -1,24 +1,16 @@
 package com.bartek.library.service.book.rental;
 
 
+import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.book.Book;
 import com.bartek.library.model.book.BookRental;
-import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.book.FoundPenaltyToPayException;
-import com.bartek.library.model.notifications.NotificationType;
 import com.bartek.library.repository.book.BookRentalRepository;
 import com.bartek.library.repository.book.BookRepository;
-import com.bartek.library.repository.admin.AccountRepository;
 import com.bartek.library.repository.notifications.PenaltyRepository;
-import com.bartek.library.service.SecurityUtilities;
-import com.bartek.library.service.notifications.PenaltyPaymentService;
 import com.bartek.library.service.notifications.UsersNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ReturnBookService {
