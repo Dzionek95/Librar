@@ -3,7 +3,7 @@ package com.bartek.library.controller.admin;
 import com.bartek.library.controller.book.OrdersQueueController;
 import com.bartek.library.model.book.Book;
 import com.bartek.library.model.book.OrdersQueue;
-import com.bartek.library.service.book.OrdersQueueService;
+import com.bartek.library.service.book.rental.OrdersQueueService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

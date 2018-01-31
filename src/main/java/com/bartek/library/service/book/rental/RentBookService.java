@@ -1,52 +1,38 @@
-package com.bartek.library.service.book;
+package com.bartek.library.service.book.rental;
 
-
+import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.book.Book;
 import com.bartek.library.model.book.BookRental;
-import com.bartek.library.model.accounts.Account;
-import com.bartek.library.model.book.FoundPenaltyToPayException;
-import com.bartek.library.model.notifications.NotificationType;
+import com.bartek.library.repository.admin.AccountRepository;
 import com.bartek.library.repository.book.BookRentalRepository;
 import com.bartek.library.repository.book.BookRepository;
-import com.bartek.library.repository.admin.AccountRepository;
-import com.bartek.library.repository.notifications.PenaltyRepository;
 import com.bartek.library.service.SecurityUtilities;
-import com.bartek.library.service.notifications.PenaltyPaymentService;
-import com.bartek.library.service.notifications.UsersNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
-public class BookRentalService {
+public class RentBookService {
 
     private BookRentalRepository rentBookRepository;
     private BookRepository bookRepository;
     private OrdersQueueService ordersQueueService;
     private SecurityUtilities securityUtilities;
     private AccountRepository accountRepository;
-    private UsersNotificationService usersNotificationService;
-    private PenaltyRepository penaltyRepository;
 
     @Autowired
-    BookRentalService(BookRentalRepository rentBookRepository,
-                      BookRepository bookRepository,
-                      OrdersQueueService ordersQueueService,
-                      SecurityUtilities securityUtilities,
-                      AccountRepository accountRepository,
-                      UsersNotificationService usersNotificationService,
-                      PenaltyRepository penaltyRepository) {
+    RentBookService(BookRentalRepository rentBookRepository,
+                    BookRepository bookRepository,
+                    OrdersQueueService ordersQueueService,
+                    SecurityUtilities securityUtilities,
+                    AccountRepository accountRepository) {
 
         this.rentBookRepository = rentBookRepository;
         this.bookRepository = bookRepository;
         this.ordersQueueService = ordersQueueService;
         this.securityUtilities = securityUtilities;
         this.accountRepository = accountRepository;
-        this.usersNotificationService = usersNotificationService;
-        this.penaltyRepository = penaltyRepository;
     }
 
     public BookRental rentBook(Long idOfBook) {
@@ -81,7 +67,6 @@ public class BookRentalService {
         bookRepository.save(bookToRent);
     }
 
-
     private BookRental prepareBookRentalData(Book bookToRent, Account rentedBy) {
         return BookRental
                 .builder()
@@ -92,28 +77,4 @@ public class BookRentalService {
                 .build();
     }
 
-    public Book returnBook(Long idOfBook) {
-        BookRental bookToReturn = rentBookRepository.findOne(idOfBook);
-        usersNotificationService.notifyUserThatBookIsAbleToRent(idOfBook);
-        if (checkIfUserHasPenaltyToPay(bookToReturn.getAccount())) {
-            throw new FoundPenaltyToPayException("It's very nice that you return book, but you already need to pay " +
-                    "punishment please proceed to /payment to pay penalty");
-        }
-        return updateBookStatus(bookToReturn);
-    }
-
-    private boolean checkIfUserHasPenaltyToPay(Account account) {
-        return penaltyRepository.findPenaltyByAccountId(account.getId()) != null;
-
-    }
-
-    private Book updateBookStatus(BookRental bookToReturn) {
-        Book returningBook = bookToReturn.getBook();
-        returningBook.setAvailable(true);
-        bookRepository.save(returningBook);
-        return returningBook;
-    }
-
-
 }
-

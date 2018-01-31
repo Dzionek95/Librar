@@ -3,6 +3,7 @@ package com.bartek.library.service.book;
 import com.bartek.library.model.book.Book;
 import com.bartek.library.model.book.OrdersQueue;
 import com.bartek.library.repository.book.OrdersQueueRepository;
+import com.bartek.library.service.book.rental.OrdersQueueService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
