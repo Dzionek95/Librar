@@ -1,4 +1,4 @@
-package com.bartek.library.service.notifications;
+package com.bartek.library.service.penalty;
 
 import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.notifications.Penalty;
@@ -38,7 +38,7 @@ public class PenaltyPaymentService {
             return FULL_PAID_AMOUNT_OF_MONEY_FOR_PENALTY;
         } else {
             penaltyRepository.save(penaltyToPay);
-            return penaltyToPay.getAmountOfMoney();
+            return amountOfMoney;
         }
     }
 

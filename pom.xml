@@ -44,7 +44,9 @@
         <sonar.version>3.3.0.603</sonar.version>
         <jacoco.version>0.7.7.201606060606</jacoco.version>
         <sonar.coverage.exclusions>
-            **/com/bartek/library/configuration/*,**/com/bartek/library/model/**/*
+            **/com/bartek/library/configuration/*,
+            **/com/bartek/library/model/**/*,
+            **/com/bartek/library/*
         </sonar.coverage.exclusions>
     </properties>
 

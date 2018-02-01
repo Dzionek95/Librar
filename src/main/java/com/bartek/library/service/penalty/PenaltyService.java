@@ -1,9 +1,10 @@
-package com.bartek.library.service.notifications;
+package com.bartek.library.service.penalty;
 
 import com.bartek.library.model.book.BookRental;
 import com.bartek.library.model.notifications.Penalty;
 import com.bartek.library.repository.book.BookRentalRepository;
 import com.bartek.library.repository.notifications.PenaltyRepository;
+import com.bartek.library.service.notifications.UsersNotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

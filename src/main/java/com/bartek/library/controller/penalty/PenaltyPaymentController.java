@@ -1,6 +1,6 @@
 package com.bartek.library.controller.penalty;
 
-import com.bartek.library.service.notifications.PenaltyPaymentService;
+import com.bartek.library.service.penalty.PenaltyPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

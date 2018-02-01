@@ -1,4 +1,4 @@
-package com.bartek.library.service.notifications;
+package com.bartek.library.service.penalty;
 
 import com.bartek.library.model.accounts.Account;
 import com.bartek.library.model.accounts.Role;
@@ -7,6 +7,8 @@ import com.bartek.library.model.book.BookRental;
 import com.bartek.library.model.notifications.Penalty;
 import com.bartek.library.repository.book.BookRentalRepository;
 import com.bartek.library.repository.notifications.PenaltyRepository;
+import com.bartek.library.service.notifications.UsersNotificationService;
+import com.bartek.library.service.penalty.PenaltyService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
