@@ -29,7 +29,7 @@ access is only for Admin account (login: Admin, password:Admin)
     * Bugs- 0
     * Vulnerabilities- 0  
     * Code Smells- 1
-    * Code Coverage- 91.8% (Without Models, Configurations(Beans), Repositories -> Only business logic: services and controllers)
+    * Code Coverage- 94.8% (Without Models, Configurations(Beans), Repositories -> Only business logic: services and controllers)
     * Duplications-  0.0%   
     
 ### Technologies that has been used:
