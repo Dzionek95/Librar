@@ -14,7 +14,7 @@ access is only for Admin account (login: Admin, password:Admin)
     * `mvn sonar:sonar` (before you need to start SonarQube server- default `localhost:9000`)
 
 ### About the application itself
-* App is divided into Admin and Reader part
+* App is divided into 3 logic parts: Admin, Reader and automatic operations part
 * Admin is able to do following: 
     * Manage accounts (CRUD)
     * Accept new books requests
@@ -25,6 +25,10 @@ access is only for Admin account (login: Admin, password:Admin)
     * If book is already rented reader is automatically added to waiting queue
     * Display ordered queue to book
     * Create request to get new book for library (that can be accepted by Admin)
+    * Pay penalty if reader kept book over the time limit
+* Automatic operations:
+    * Scheduler every 60000ms (1 min) is checking if reader did not kept book for 
+    too long- if so penalty is being created (each minute 0.5$)
 * Sonar stats:
     * Bugs- 0
     * Vulnerabilities- 0  
